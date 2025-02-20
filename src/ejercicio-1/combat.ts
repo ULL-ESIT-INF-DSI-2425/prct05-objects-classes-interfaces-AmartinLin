@@ -34,38 +34,38 @@ export class Combat {
     let vida1: number = this.pokemon1.HP;
     let vida2: number = this.pokemon2.HP;
 
-    // console.log(
-    //   `¡Comienza el combate entre ${this.pokemon1.nombre} y ${this.pokemon2.nombre}!`,
-    // );
+    console.log(
+      `¡Comienza el combate entre ${this.pokemon1.nombre} y ${this.pokemon2.nombre}!`,
+    );
 
     while (vida1 > 0 && vida2 > 0) {
       const daño1 = this.calcularDaño(this.pokemon1, this.pokemon2);
       vida2 = Math.max(0, vida2 - daño1);
       this.registro.agregarTurno(turno, vida1, vida2);
 
-      // console.log(
-      //   `Turno ${turno}: ${this.pokemon1.nombre} ataca a ${this.pokemon2.nombre} y le causa ${daño1} de daño.`,
-      // );
-      // console.log(
-      //   `Estado: ${this.pokemon1.nombre} (HP: ${vida1}) - ${this.pokemon2.nombre} (HP: ${vida2})`,
-      // );
+      console.log(
+        `Turno ${turno}: ${this.pokemon1.nombre} ataca a ${this.pokemon2.nombre} y le causa ${daño1} de daño.`,
+      );
+      console.log(
+        `Estado: ${this.pokemon1.nombre} (HP: ${vida1}) - ${this.pokemon2.nombre} (HP: ${vida2})`,
+      );
       
       if (vida2 === 0) break;
       turno++;
       const daño2 = this.calcularDaño(this.pokemon2, this.pokemon1);
       vida1 = Math.max(0, vida1 - daño2);
       this.registro.agregarTurno(turno, vida1, vida2);
-      // console.log(
-      //   `Turno ${turno}: ${this.pokemon2.nombre} ataca a ${this.pokemon1.nombre} y le causa ${daño2} de daño.`,
-      // );
-      // console.log(
-      //   `Estado: ${this.pokemon1.nombre} (HP: ${vida1}) - ${this.pokemon2.nombre} (HP: ${vida2})`,
-      // );
+      console.log(
+        `Turno ${turno}: ${this.pokemon2.nombre} ataca a ${this.pokemon1.nombre} y le causa ${daño2} de daño.`,
+      );
+      console.log(
+        `Estado: ${this.pokemon1.nombre} (HP: ${vida1}) - ${this.pokemon2.nombre} (HP: ${vida2})`,
+      );
 
       turno++;
     }
-    //const ganador = vida1 > 0 ? this.pokemon1.nombre : this.pokemon2.nombre;
-    //console.log(`¡${ganador} ha ganado el combate!`);
+    const ganador = vida1 > 0 ? this.pokemon1.nombre : this.pokemon2.nombre;
+    console.log(`¡${ganador} ha ganado el combate!`);
     return this.registro.obtenerTurnos()
   }
 }
