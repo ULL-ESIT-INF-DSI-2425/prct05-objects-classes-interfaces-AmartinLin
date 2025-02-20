@@ -34,3 +34,16 @@ describe("Clase Pokedex", () => {
     expect(miPokedex.filtrarPorAtributo("nombre", "Flareon")).toStrictEqual([{nombre : "Flareon", Peso : 30, Altura: 1.0, Tipo: "Fuego", Ataque: 70, Defensa: 40, Velocidad: 30, HP: 70}])
   })
 });
+
+
+describe("Clase combat", () => {
+  const Pikachu: Pokemon = {nombre : "Pikachu", Peso : 6, Altura: 0.4, Tipo: "Eléctrico", Ataque: 55, Defensa: 40, Velocidad: 90, HP: 35};
+  const Flareon: Pokemon = {nombre : "Flareon", Peso : 30, Altura: 1.0, Tipo: "Fuego", Ataque: 70, Defensa: 40, Velocidad: 30, HP: 70};
+  const Combate: Combat = {Pikachu, Flareon};
+  test("Método start", () => {
+    expect(Combate.start()).toBe([
+      {"turno": 0, "vidas": [1.25, 35]},
+      {"turno": 1, "vidas": [1.25, 0]},
+    ])
+  });
+})
