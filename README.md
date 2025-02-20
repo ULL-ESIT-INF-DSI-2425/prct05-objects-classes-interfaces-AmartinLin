@@ -9,7 +9,8 @@ Realizado las instalaciones y modificaciones oportunas hemos comenzado a configu
 1. Creamos un directorio llamado `.github/workflows` 
 2. Creamos un fichero en dicho directorio llamdo `ci.yml`
 3. Insertamos en el fichero anterior el flujo de trabajo que queramos, en mi caso he tomado la referencia del repositorio del aula virtual:
-´´´yml
+´´´
+
 name: Tests
 
 on:
@@ -38,5 +39,6 @@ jobs:
       run: npm ci
     - name: Running tests
       run: npm test
+      
 ´´´
 4. 
