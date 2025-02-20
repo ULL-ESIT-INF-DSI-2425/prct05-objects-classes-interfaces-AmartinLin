@@ -39,4 +39,20 @@ jobs:
     - name: Running tests
       run: npm test
 ```
-4. 
+4. Una vez realizado lo anterior simplemente tendríamos que hacer un git push con los ultimos cambios y los test se ejecutarían al subirse al repositorio.
+
+## Coverage
+> NOTE: no se ha implementado ya que por lo visto coverage es de pago
+1. creamos un fichero `vitest.config.ts` y le añadimos el siguiente código:
+```vitest
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    coverage: {
+      provider: 'istanbul' // or 'v8'
+    },
+  },
+})
+```
+2. instalamos manualmente las dependencias `npm i -D @vistest/coverage-v8`
