@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { Pokedex } from "../src/ejercicio-1/pokedex";
 import { PokeData } from "../src/ejercicio-1/pokedata";
+import { Combat } from "../src/ejercicio-1/combat";
 
 describe("Clase Pokedex", () => {
   const Pikachu: PokeData = {nombre : "Pikachu", Peso : 6, Altura: 0.4, Tipo: "Eléctrico", Ataque: 55, Defensa: 40, Velocidad: 90, HP: 35};
@@ -37,13 +38,13 @@ describe("Clase Pokedex", () => {
 
 
 describe("Clase combat", () => {
-  const Pikachu: Pokemon = {nombre : "Pikachu", Peso : 6, Altura: 0.4, Tipo: "Eléctrico", Ataque: 55, Defensa: 40, Velocidad: 90, HP: 35};
-  const Flareon: Pokemon = {nombre : "Flareon", Peso : 30, Altura: 1.0, Tipo: "Fuego", Ataque: 70, Defensa: 40, Velocidad: 30, HP: 70};
-  const Combate: Combat = {Pikachu, Flareon};
+  const Pikachu: PokeData = {nombre : "Pikachu", Peso : 6, Altura: 0.4, Tipo: "Eléctrico", Ataque: 55, Defensa: 40, Velocidad: 90, HP: 35};
+  const Flareon: PokeData = {nombre : "Flareon", Peso : 30, Altura: 1.0, Tipo: "Fuego", Ataque: 70, Defensa: 40, Velocidad: 30, HP: 70};
+  const Combate: Combat = new Combat(Pikachu, Flareon);
   test("Método start", () => {
-    expect(Combate.start()).toBe([
-      {"turno": 0, "vidas": [1.25, 35]},
-      {"turno": 1, "vidas": [1.25, 0]},
+    expect(Combate.start()).toEqual([
+      {"numero": 1, "vidas": [35, 1.25]},
+      {"numero": 2, "vidas": [0, 1.25]},
     ])
   });
 })
