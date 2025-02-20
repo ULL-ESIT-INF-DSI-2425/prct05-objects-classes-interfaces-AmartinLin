@@ -9,36 +9,35 @@ Realizado las instalaciones y modificaciones oportunas hemos comenzado a configu
 1. Creamos un directorio llamado `.github/workflows` 
 2. Creamos un fichero en dicho directorio llamdo `ci.yml`
 3. Insertamos en el fichero anterior el flujo de trabajo que queramos, en mi caso he tomado la referencia del repositorio del aula virtual:
+
 ´´´
+    name: Tests
 
-name: Tests
+    on:
+      push:
+        branches: [ "main" ]
+      pull_request:
+        branches: [ "main" ]
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    jobs:
+      build:
 
-jobs:
-  build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            node-version: [18.x, 20.x, 22.x, 23.x]
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x, 23.x]
-
-    steps:
-    - name: Cloning repo
-      uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Installing dependencies
-      run: npm ci
-    - name: Running tests
-      run: npm test
-      
+        steps:
+        - name: Cloning repo
+          uses: actions/checkout@v4
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v4
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: Installing dependencies
+          run: npm ci
+        - name: Running tests
+          run: npm test
 ´´´
 4. 
