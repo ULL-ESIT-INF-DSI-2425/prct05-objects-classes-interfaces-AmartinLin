@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { Artista } from "../src/ejercicio-2/Artista";
+//import { Artista } from "../src/ejercicio-2/Artista";
 import { Disco } from "../src/ejercicio-2/Disco";
-//import { Cancion } from "../src/ejercicio-2/Cancion";
-import { biblioteca } from "../src/ejercicio-2/biblioteca";
+import { Cancion } from "../src/ejercicio-2/Cancion";
+//import { Biblioteca } from "../src/ejercicio-2/Biblioteca";
 
 // describe("Clase Canción", () => {
 //   const cancion : Cancion = {nombre: "Crossroads", tiempo: 314, genero: "Blues Rock", single: false, reproducciones: 810465};
@@ -13,11 +13,11 @@ import { biblioteca } from "../src/ejercicio-2/biblioteca";
 
 describe("Clase Disco", () => {
   const cancion : Cancion = {nombre: "Crossroads", tiempo: 314, genero: "Blues Rock", single: false, reproducciones: 810465};
-  const disco : Disco = {nombre: "Crossroads", salida: 1988, canciones: [cancion]};
+  const disco : Disco = new Disco ("Crossroads", 1988, [cancion]);
 
   const laylaSong : Cancion = {nombre: "Layla", tiempo: 425, genero: "Blues Rock", single: false, reproducciones: 56832104};
   const tellTheTruth : Cancion = {nombre: "Tell the truth", tiempo: 399, genero: "Blues Rock", single: false, reproducciones: 264145};
-  const layla : Disco = {nombre: "Layla and Other Assorted Love Songs", salida: 1970, canciones: [laylaSong, tellTheTruth]};
+  const layla : Disco = new Disco("Layla and Other Assorted Love Songs", 1970, [laylaSong, tellTheTruth]);
 
   test("Calcular número de canciones del disco", () => {
     expect(disco.nSongs()).toBe(1);
