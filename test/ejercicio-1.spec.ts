@@ -40,7 +40,9 @@ describe("Clase Pokedex", () => {
 describe("Clase combat", () => {
   const Pikachu: PokeData = {nombre : "Pikachu", Peso : 6, Altura: 0.4, Tipo: "Eléctrico", Ataque: 55, Defensa: 40, Velocidad: 90, HP: 35};
   const Flareon: PokeData = {nombre : "Flareon", Peso : 30, Altura: 1.0, Tipo: "Fuego", Ataque: 70, Defensa: 40, Velocidad: 30, HP: 70};
+
   const Combate: Combat = new Combat(Pikachu, Flareon);
+  
   test("Método start", () => {
     expect(Combate.start()).toEqual([
       {"numero": 1, "vidas": [35, 1.25]},

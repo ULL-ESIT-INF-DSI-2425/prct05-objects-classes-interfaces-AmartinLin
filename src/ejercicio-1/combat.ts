@@ -4,6 +4,11 @@ import { RegistroDeTurnos } from "./registroDeTurnos";
 export class Combat {
   private registro: RegistroDeTurnos;
 
+  /**
+   * Constructor de la clase Combat
+   * @param pokemon1 - [PokeData] Pokemon que empieza el combate
+   * @param pokemon2 - [PokeData] Pokemon contrincante
+   */
   constructor(
     private pokemon1: PokeData,
     private pokemon2: PokeData,
@@ -11,6 +16,13 @@ export class Combat {
     this.registro = new RegistroDeTurnos();
   }
 
+  /**
+   * Método que nos permite calcular el valor de la efectividad 
+   * de los ataques
+   * @param tipoAtacante - Tipo de ataque del pokemon atacante
+   * @param tipoDefensor - Tipo de pokemon defensor
+   * @returns [nuber] valor de la efectividad
+   */
   private calcularEfectividad(
     tipoAtacante: string,
     tipoDefensor: string,
@@ -24,32 +36,40 @@ export class Combat {
     return efectividades[tipoAtacante][tipoDefensor] || 1;
   }
 
+  /**
+   * Calcula el daño total del turno
+   * @param atacante - [PokeData] Pokemon atacante
+   * @param defensor - [PokeData] Pokemon defensor
+   * @returns 
+   */
   private calcularDaño(atacante: PokeData, defensor: PokeData): number {
     const efectividad = this.calcularEfectividad(atacante.Tipo, defensor.Tipo);
     return (50 * (atacante.Ataque / defensor.Defensa) * efectividad);
   }
 
+  /**
+   * Método que da comienzo el combate
+   * el combate es narrado por consola y cada turno actualiza la vida
+   * y daños realizados
+   * @returns Array de los turnos realizados (registro de turnos)
+   */
   start(): { numero: number; vidas: number[] }[] {
     let turno = 1;
     let vida1: number = this.pokemon1.HP;
     let vida2: number = this.pokemon2.HP;
-
     console.log(
       `¡Comienza el combate entre ${this.pokemon1.nombre} y ${this.pokemon2.nombre}!`,
     );
-
     while (vida1 > 0 && vida2 > 0) {
       const daño1 = this.calcularDaño(this.pokemon1, this.pokemon2);
       vida2 = Math.max(0, vida2 - daño1);
       this.registro.agregarTurno(turno, vida1, vida2);
-
       console.log(
         `Turno ${turno}: ${this.pokemon1.nombre} ataca a ${this.pokemon2.nombre} y le causa ${daño1} de daño.`,
       );
       console.log(
         `Estado: ${this.pokemon1.nombre} (HP: ${vida1}) - ${this.pokemon2.nombre} (HP: ${vida2})`,
       );
-      
       if (vida2 === 0) break;
       turno++;
       const daño2 = this.calcularDaño(this.pokemon2, this.pokemon1);
@@ -61,7 +81,6 @@ export class Combat {
       console.log(
         `Estado: ${this.pokemon1.nombre} (HP: ${vida1}) - ${this.pokemon2.nombre} (HP: ${vida2})`,
       );
-
       turno++;
     }
     const ganador = vida1 > 0 ? this.pokemon1.nombre : this.pokemon2.nombre;

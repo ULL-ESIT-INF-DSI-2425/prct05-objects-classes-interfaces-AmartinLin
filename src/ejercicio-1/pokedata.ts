@@ -1,3 +1,6 @@
+/**
+ * Interfaz para almacenar los datos de un pokemon
+ */
 export interface PokeData {
   nombre: string;
   Peso: number;
