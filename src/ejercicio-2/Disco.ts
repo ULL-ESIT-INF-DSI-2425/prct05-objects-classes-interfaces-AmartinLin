@@ -1,6 +1,6 @@
 import { Cancion } from "./Cancion";
 
-export interface IDisco {
+interface IDisco {
   time(): number;
   nSongs(): number;
   reproducciones(): number;
@@ -35,5 +35,9 @@ export class Disco implements IDisco {
 
   get year() {
     return this._salida;
+  }
+
+  get canciones() {
+    return this._canciones;
   }
 }
