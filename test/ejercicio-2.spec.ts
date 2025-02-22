@@ -169,4 +169,9 @@ describe("Clase Biblioteca", () => {
     ]);
     consoleSpy.mockRestore();
   });
+
+  test("Número de canciones por disco", () => {
+    expect(otraBiblioteca.numeroDeCanciones("Crossroads")).toBe(1)
+    expect(otraBiblioteca.numeroDeCanciones("Fearless")).toBe(2)
+  })
 })
