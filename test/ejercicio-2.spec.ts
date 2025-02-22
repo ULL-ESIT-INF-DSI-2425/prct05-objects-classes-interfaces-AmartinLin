@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi} from "vitest";
 import { Artista } from "../src/ejercicio-2/Artista";
 import { Disco } from "../src/ejercicio-2/Disco";
 import { Cancion } from "../src/ejercicio-2/Cancion";
@@ -50,6 +50,123 @@ describe("Clase Artista", () => {
 });
 
 describe("Clase Biblioteca", () => {
-  const miBiblioteca: Biblioteca = new Biblioteca(EricClapton, TaylorSwift)
-  expect(miBiblioteca.info()).toBe()
+  const miBiblioteca: Biblioteca = new Biblioteca(EricClapton)
+  const otraBiblioteca = new Biblioteca(EricClapton, TaylorSwift);
+  test ("Información completa de la tabla", () => {
+    const consoleSpy = vi.spyOn(console, "table").mockImplementation(() => {});
+    miBiblioteca.info();
+    expect(consoleSpy).toHaveBeenCalledWith([
+      {
+        Artista: "Eric Clapton",
+        Disco: "Crossroads",
+        Canción: "Crossroads",
+        Duración: "314 seg",
+        Género: "Blues Rock",
+        Single: "❌" ,
+        Reproducciones: 810465,
+      },
+      {
+        Artista: "Eric Clapton",
+        Disco: "Layla and Other Assorted Love Songs",
+        Canción: "Layla",
+        Duración: "425 seg",
+        Género: "Blues Rock",
+        Single: "❌" ,
+        Reproducciones: 56832104,
+      },
+      {
+        Artista: "Eric Clapton",
+        Disco: "Layla and Other Assorted Love Songs",
+        Canción: "Tell the truth",
+        Duración: "399 seg",
+        Género: "Blues Rock",
+        Single: "❌" ,
+        Reproducciones: 264145,
+      },
+    ]);
+    consoleSpy.mockRestore();
+  })
+
+  test("Búsqueda por nombre", () => {
+    const consoleSpy = vi.spyOn(console, "table").mockImplementation(() => {});
+    otraBiblioteca.search("tell The Truth");
+    expect(consoleSpy).toHaveBeenCalledWith([
+      {
+        Artista: "Eric Clapton",
+        Disco: "Layla and Other Assorted Love Songs",
+        Canción: "Tell the truth",
+        Duración: "399 seg",
+        Género: "Blues Rock",
+        Single: "❌" ,
+        Reproducciones: 264145,
+      },
+    ]);
+    otraBiblioteca.search("Taylor swift")
+    expect(consoleSpy).toHaveBeenCalledWith([
+      {
+        Artista: "Taylor Swift",
+        Disco: "Speak Know",
+        Canción: "Back to December",
+        Duración: "304 seg",
+        Género: "Pop",
+        Single: "❌" ,
+        Reproducciones: 349159746,
+      },
+      {
+        Artista: "Taylor Swift",
+        Disco: "Speak Know",
+        Canción: "Enchanted",
+        Duración: "304 seg",
+        Género: "Pop",
+        Single: "❌" ,
+        Reproducciones: 60987447,
+      },
+      {
+        Artista: "Taylor Swift",
+        Disco: "Speak Know",
+        Canción: "Mine",
+        Duración: "211 seg",
+        Género: "Pop",
+        Single: "❌" ,
+        Reproducciones: 324175705,
+      },
+      {
+        Artista: "Taylor Swift",
+        Disco: "Fearless",
+        Canción: "You Belong to Me",
+        Duración: "210 seg",
+        Género: "Country Pop",
+        Single: "❌" ,
+        Reproducciones: 41447782,
+      },
+      {
+        Artista: "Taylor Swift",
+        Disco: "Fearless",
+        Canción: "Love Story",
+        Duración: "241 seg",
+        Género: "Country Pop",
+        Single: "❌" ,
+        Reproducciones: 52958553,
+      },
+      {
+        Artista: "Taylor Swift",
+        Disco: "Lover",
+        Canción: "Cruel Summer",
+        Duración: "234 seg",
+        Género: "Country Pop",
+        Single: "❌" ,
+        Reproducciones: 228501899,
+      },
+      {
+        Artista: "Taylor Swift",
+        Disco: "Lover",
+        Canción: "The Archer",
+        Duración: "300 seg",
+        Género: "Country Pop",
+        Single: "❌" ,
+        Reproducciones: 41287853,
+      },
+    ]);
+    consoleSpy.mockRestore();
+  });
 })
