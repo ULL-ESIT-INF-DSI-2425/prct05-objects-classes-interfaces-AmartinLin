@@ -1,5 +1,4 @@
 import { Disco } from "./Disco";
-import { Cancion } from "./Cancion";
 import { Artista } from "./Artista";
 
 interface IBiblioteca {
@@ -13,10 +12,18 @@ interface IBiblioteca {
 export class Biblioteca implements IBiblioteca {
   private _artistas: Artista[];
 
+  /**
+   * Constructor de la clase Biblioteca
+   * @param artistas - lista de artistas 
+   */
   constructor(...artistas: Artista[]) {
     this._artistas = artistas;
   }
 
+  /**
+   * Nos da información de nuestra biblioteca en forma de tabla
+   * | index | nombre del artista | nombre del disco | Canción | Duracion en segundos | Género | si es single o no | número de reproducciones
+   */
   info(): void {
     const tabla = this._artistas.flatMap(artista =>
       artista.discos.flatMap((disco) =>
@@ -34,6 +41,12 @@ export class Biblioteca implements IBiblioteca {
     console.table(tabla);
   }  
 
+  /**
+   * Nos permite hacer una búsqueda a toda la biblioteca
+   * (mediante el nombre únicamente)
+   * @param query - String con el nombre de artista, disco o cancion
+   * @returns tabla con los datos relacionados
+   */
   search(query: string): void {
     query = query.toLowerCase();
     const artistasEncontrados: Artista[] = this._artistas.filter(artista =>
@@ -94,6 +107,11 @@ export class Biblioteca implements IBiblioteca {
     console.table(cancionesEncontradas);
   }
 
+  /**
+   * Método privado auxiliar que nos permite buscar un disco mediante el nombre
+   * @param nombreDisco - nombre del disco
+   * @returns el disco en concreto o nada
+   */
   private buscarDisco(nombreDisco: string): Disco | null {
     for (const artista of this._artistas) {
       const discoEncontrado = artista.discos.find(disco =>
@@ -103,45 +121,36 @@ export class Biblioteca implements IBiblioteca {
         return discoEncontrado;
       }
     }
-    return null; // Si no se encuentra el disco
+    return null; 
   }
   
+  /**
+   * numero total de todas las canciones de un disco
+   * @param nombreDisco - nombre de un disco
+   * @returns numero de canciones (si esque el disco existe)
+   */
   numeroDeCanciones(nombreDisco: string): number {
     const disco = this.buscarDisco(nombreDisco);
     return disco ? disco.nSongs() : 0;
   }
 
+  /**
+   * Tiempo que dura un disco según la suma de sus canciones
+   * @param nombreDisco - nombre del disco
+   * @returns numero de segundos que dura el disco
+   */
   tiempoDeDisco(nombreDisco: string): number {
     const disco = this.buscarDisco(nombreDisco);
     return disco ? disco.time() : 0;
-   }
+  }
 
+  /**
+   * numero de reproducciones total de todas las canciones de un disco
+   * @param nombreDisco - nombre de un disco
+   * @returns numero de reproducciones (si esque el disco existe)
+   */
   vistasDeDisco(nombreDisco: string): number {
     const disco = this.buscarDisco(nombreDisco);
     return disco ? disco.reproducciones() : 0;
   }
 }
-
-// Eric Clapton
-const cancion : Cancion = {nombre: "Crossroads", tiempo: 314, genero: "Blues Rock", single: false, reproducciones: 810465};
-const disco : Disco = new Disco ("Crossroads", 1988, [cancion]);
-const laylaSong : Cancion = {nombre: "Layla", tiempo: 425, genero: "Blues Rock", single: false, reproducciones: 56832104};
-const tellTheTruth : Cancion = {nombre: "Tell the truth", tiempo: 399, genero: "Blues Rock", single: false, reproducciones: 264145};
-const layla : Disco = new Disco("Layla and Other Assorted Love Songs", 1970, [laylaSong, tellTheTruth]);
-const EricClapton: Artista = new Artista("Eric Clapton", 3000000, [disco, layla]);
-// Taylor Swift
-const backToDecember: Cancion = {nombre: "Back to December", tiempo: 304, genero: "Pop", single: false, reproducciones: 349159746};
-const enchanted: Cancion = {nombre: "Enchanted", tiempo: 304, genero: "Pop", single: false, reproducciones: 60987447};
-const mine: Cancion = {nombre: "Mine", tiempo: 211, genero: "Pop", single: false, reproducciones: 324175705};
-const speakKnow: Disco = new Disco("Speak Know", 2010, [backToDecember, enchanted, mine]);
-const youBelongToMe: Cancion = {nombre: "You Belong to Me", tiempo: 210, genero: "Country Pop", single: false, reproducciones: 41447782};
-const loveStory: Cancion = {nombre: "Love Story", tiempo: 241, genero: "Country Pop", single: false, reproducciones: 52958553};
-const fearless: Disco = new Disco("Fearless", 2021, [youBelongToMe, loveStory]);
-const cruelSummer: Cancion = {nombre: "Cruel Summer", tiempo: 234, genero: "Country Pop" , single: false, reproducciones: 228501899};
-const theArcher: Cancion = {nombre: "The Archer", tiempo: 300, genero: "Country Pop" , single: false, reproducciones: 41287853};
-const lover: Disco = new Disco("Lover", 2019, [cruelSummer, theArcher]);
-const TaylorSwift: Artista = new Artista("Taylor Swift", 88200000, [speakKnow, fearless, lover]);
-
-const miBiblioteca: Biblioteca = new Biblioteca(EricClapton, TaylorSwift);
-
-miBiblioteca.search("taylor")
