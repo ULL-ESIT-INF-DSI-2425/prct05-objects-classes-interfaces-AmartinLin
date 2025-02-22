@@ -6,8 +6,8 @@ interface IBiblioteca {
   info(): void;
   search(parametro: string) : void;
   numeroDeCanciones(nombreDisco: string): number;
-  // tiempoDeDisco(nombreDisco: string): void;
-  // vistasDeDisco(nombreDisco: string): void;
+  tiempoDeDisco(nombreDisco: string): number;
+  vistasDeDisco(nombreDisco: string): number;
 }
 
 export class Biblioteca implements IBiblioteca {
@@ -94,16 +94,31 @@ export class Biblioteca implements IBiblioteca {
     console.table(cancionesEncontradas);
   }
 
-  numeroDeCanciones(nombreDisco: string): number {
+  private buscarDisco(nombreDisco: string): Disco | null {
     for (const artista of this._artistas) {
-      const discoEncontrado: (Disco | undefined) = artista.discos.find((disco) => 
-        disco.nombre.toLocaleLowerCase() === nombreDisco.toLocaleLowerCase()
+      const discoEncontrado = artista.discos.find(disco =>
+        disco.nombre.toLowerCase() === nombreDisco.toLowerCase()
       );
       if (discoEncontrado) {
-        return discoEncontrado.nSongs();
+        return discoEncontrado;
       }
     }
-    return 0;
+    return null; // Si no se encuentra el disco
+  }
+  
+  numeroDeCanciones(nombreDisco: string): number {
+    const disco = this.buscarDisco(nombreDisco);
+    return disco ? disco.nSongs() : 0;
+  }
+
+  tiempoDeDisco(nombreDisco: string): number {
+    const disco = this.buscarDisco(nombreDisco);
+    return disco ? disco.time() : 0;
+   }
+
+  vistasDeDisco(nombreDisco: string): number {
+    const disco = this.buscarDisco(nombreDisco);
+    return disco ? disco.reproducciones() : 0;
   }
 }
 
