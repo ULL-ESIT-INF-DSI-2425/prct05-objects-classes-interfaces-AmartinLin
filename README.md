@@ -42,17 +42,65 @@ jobs:
 4. Una vez realizado lo anterior simplemente tendríamos que hacer un git push con los ultimos cambios y los test se ejecutarían al subirse al repositorio.
 
 ## Coverage
-> NOTE: no se ha implementado ya que por lo visto coverage es de pago
-1. creamos un fichero `vitest.config.ts` y le añadimos el siguiente código:
-```vitest
-import { defineConfig } from 'vitest/config'
+Para realizar el cubrimiento de código hemos seguido el tutorial proporcionado por el profesorado en el aula virtual, los pasos a seguir han sido los siguientes:
+1. hemos creado un nevo "script" en el `package.json` llamado `coverage` que ejecutará el debido seguimiento. El comando que ejecuta sería `vitest run --coverage --coverage.include src/*` el cual redigige al codigo escrito en el directorio src.
+2. La primera vez nos obliga a instalarlo, por lo que lo instalamos con coverage-v8, que es el motor por defecto.
+> NOTA: durante la práctica hemos tenido muchos problemas con coverage ya que no se tiene en cuenta la configuración con `vitest.config.ts` que al parecer es necesaria para que encuentre los tests.
+3. Hemos creado el fichero `vitest.config.ts` y le hemos puesto la siguiente configuración:
+```ts
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  plugins: [tsconfigPaths()],
   test: {
+    globals: true,
+    environment: 'node',
     coverage: {
-      provider: 'istanbul' // or 'v8'
+      provider: 'v8',
+      include: ['src/**/*.ts'], 
+      reporter: ['text', 'lcov'],
     },
   },
-})
+});
 ```
-2. instalamos manualmente las dependencias `npm i -D @vistest/coverage-v8`
+4. hemos instalado el paquete que nos falta con el comando `npm install vite-tsconfig-paths --save-dev`
+5. ejecutando ahora el comando `npx vitest --coverage` ya nos da los resultados de nuestro cubrimiento. (También cambiamos el comando en package.json)
+
+### Coveralls
+Hemos seguido el tutorial al igual que con coverage
+1. Nos hemos registrado con nuestra cuenta de github a [coveralls](https://coveralls.io/)
+2. hemos pues nuestro repositorio en publico y lo hemos añadido a coveralls
+3. Seguidamente creamos nuestro `.github/workflows/coveralls.yml` y pegamos el código proporcionado en el aula virtual: 
+```yml
+name: Coveralls
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Cloning repo
+      uses: actions/checkout@v4
+    - name: Use Node.js 23.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 23.x
+    - name: Installing dependencies
+      run: npm ci
+    - name: Generating coverage information
+      run: npm run coverage
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2.3.6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+Esto lo que permitirá es que podamos llevar el cubrimiento de código en coveralls directamente cuando hagamos algun pull_request o push 
+4. 
