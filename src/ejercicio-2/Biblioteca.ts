@@ -5,7 +5,7 @@ import { Artista } from "./Artista";
 interface IBiblioteca {
   info(): void;
   search(parametro: string) : void;
-  // numeroDeCanciones(nombreDisco: string): void;
+  numeroDeCanciones(nombreDisco: string): number;
   // tiempoDeDisco(nombreDisco: string): void;
   // vistasDeDisco(nombreDisco: string): void;
 }
@@ -36,7 +36,7 @@ export class Biblioteca implements IBiblioteca {
 
   search(query: string): void {
     query = query.toLowerCase();
-    const artistasEncontrados = this._artistas.filter(artista =>
+    const artistasEncontrados: Artista[] = this._artistas.filter(artista =>
       artista.nombre.toLowerCase().includes(query)
     );
     if (artistasEncontrados.length > 0) {
@@ -92,6 +92,18 @@ export class Biblioteca implements IBiblioteca {
       )
     );
     console.table(cancionesEncontradas);
+  }
+
+  numeroDeCanciones(nombreDisco: string): number {
+    for (const artista of this._artistas) {
+      const discoEncontrado: (Disco | undefined) = artista.discos.find((disco) => 
+        disco.nombre.toLocaleLowerCase() === nombreDisco.toLocaleLowerCase()
+      );
+      if (discoEncontrado) {
+        return discoEncontrado.nSongs();
+      }
+    }
+    return 0;
   }
 }
 
