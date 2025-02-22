@@ -174,4 +174,14 @@ describe("Clase Biblioteca", () => {
     expect(otraBiblioteca.numeroDeCanciones("Crossroads")).toBe(1)
     expect(otraBiblioteca.numeroDeCanciones("Fearless")).toBe(2)
   })
+
+  test("segundos de reproduccion por disco", () => {
+    expect(otraBiblioteca.tiempoDeDisco("Crossroads")).toBe(314)
+    expect(otraBiblioteca.tiempoDeDisco("Fearless")).toBe(210 + 241)
+  })
+
+  test("numero de reproducciones por disco", () => {
+    expect(otraBiblioteca.vistasDeDisco("Crossroads")).toBe(810465)
+    expect(otraBiblioteca.vistasDeDisco("Fearless")).toBe(41447782 + 52958553)
+  })
 })
