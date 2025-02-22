@@ -16,6 +16,14 @@ export class Artista implements IArtista {
     this._nombre = nombre;
   }
 
+  get oyentes(): number {
+    return this._oyentes;
+  }
+
+  get nombre() : string {
+    return this._nombre
+  }
+
   get discos() : Disco[] {
     return this._discos;
   }
