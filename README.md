@@ -45,8 +45,8 @@ jobs:
 Para realizar el cubrimiento de código hemos seguido el tutorial proporcionado por el profesorado en el aula virtual, los pasos a seguir han sido los siguientes:
 1. hemos creado un nevo "script" en el `package.json` llamado `coverage` que ejecutará el debido seguimiento. El comando que ejecuta sería `vitest run --coverage --coverage.include src/*` el cual redigige al codigo escrito en el directorio src.
 2. La primera vez nos obliga a instalarlo, por lo que lo instalamos con coverage-v8, que es el motor por defecto.
-> NOTA: durante la práctica hemos tenido muchos problemas con coverage ya que no se tiene en cuenta la configuración con `vitest.config.ts` que al parecer es necesaria para que encuentre los tests.
-3. Hemos creado el fichero `vitest.config.ts` y le hemos puesto la siguiente configuración:
+> NOTA: durante la práctica hemos tenido muchos problemas con coverage ya que no se tiene en cuenta la configuración con `vitest.config.mts` que al parecer es necesaria para que encuentre los tests.
+3. Hemos creado el fichero `vitest.config.mts` y le hemos puesto la siguiente configuración:
 ```ts
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -103,4 +103,5 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 Esto lo que permitirá es que podamos llevar el cubrimiento de código en coveralls directamente cuando hagamos algun pull_request o push 
-4. 
+4. hacemos un push y en la página de coveralls le damos al repo on GitHub, para ir al repositorio en cuestión y verificar su ejecución.
+5. Una vez ejecutado en la página de coveralls nos aparece nuestro porcentaje de cubrimiento y nuestra gráfica con los detalles del código.
