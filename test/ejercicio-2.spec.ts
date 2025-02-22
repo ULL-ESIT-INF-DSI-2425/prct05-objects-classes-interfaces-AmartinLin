@@ -101,6 +101,27 @@ describe("Clase Biblioteca", () => {
         Reproducciones: 264145,
       },
     ]);
+    otraBiblioteca.search("Layla and Other Assorted Love Songs");
+    expect(consoleSpy).toHaveBeenCalledWith([
+      {
+        Artista: "Eric Clapton",
+        Disco: "Layla and Other Assorted Love Songs",
+        Canción: "Layla",
+        Duración: "425 seg",
+        Género: "Blues Rock",
+        Single: "❌" ,
+        Reproducciones: 56832104,
+      },
+      {
+        Artista: "Eric Clapton",
+        Disco: "Layla and Other Assorted Love Songs",
+        Canción: "Tell the truth",
+        Duración: "399 seg",
+        Género: "Blues Rock",
+        Single: "❌" ,
+        Reproducciones: 264145,
+      },
+    ]);
     otraBiblioteca.search("Taylor swift")
     expect(consoleSpy).toHaveBeenCalledWith([
       {

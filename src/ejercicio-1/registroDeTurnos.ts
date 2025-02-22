@@ -27,15 +27,15 @@ export class RegistroDeTurnos {
     return this.turnos;
   }
 
-  /**
-   * Imprime por consola los turnos que se han llevado a cabo
-   * (No se verifica en los test)
-   */
-  mostrarTurnos(): void {
-    this.turnos.forEach((turno) => {
-      console.log(
-        `Turno ${turno.numero}: Vida Pokémon 1 = ${turno.vidas[0]}, Vida Pokémon 2 = ${turno.vidas[1]}`,
-      );
-    });
-  }
+  // /**
+  //  * Imprime por consola los turnos que se han llevado a cabo
+  //  * (No se verifica en los test)
+  //  */
+  // mostrarTurnos(): void {
+  //   this.turnos.forEach((turno) => {
+  //     console.log(
+  //       `Turno ${turno.numero}: Vida Pokémon 1 = ${turno.vidas[0]}, Vida Pokémon 2 = ${turno.vidas[1]}`,
+  //     );
+  //   });
+  // }
 }

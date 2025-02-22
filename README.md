@@ -66,6 +66,7 @@ export default defineConfig({
 ```
 4. hemos instalado el paquete que nos falta con el comando `npm install vite-tsconfig-paths --save-dev`
 5. ejecutando ahora el comando `npx vitest --coverage` ya nos da los resultados de nuestro cubrimiento. (También cambiamos el comando en package.json)
+> NOTA: Cuando hagamos la documentación tenemos que incluir en nuestro `tsconfig.json` a `vitest.config.mts` para que no lo procese como codigo fuente
 
 ### Coveralls
 Hemos seguido el tutorial al igual que con coverage
