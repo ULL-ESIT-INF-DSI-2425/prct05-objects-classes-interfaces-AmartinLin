@@ -104,5 +104,10 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 Esto lo que permitirá es que podamos llevar el cubrimiento de código en coveralls directamente cuando hagamos algun pull_request o push 
+
 4. hacemos un push y en la página de coveralls le damos al repo on GitHub, para ir al repositorio en cuestión y verificar su ejecución.
 5. Una vez ejecutado en la página de coveralls nos aparece nuestro porcentaje de cubrimiento y nuestra gráfica con los detalles del código.
+
+[![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2425/prct05-objects-classes-interfaces-AmartinLin/badge.svg?branch=main)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2425/prct05-objects-classes-interfaces-AmartinLin?branch=main)
+
+[![Coveralls](https://github.com/ULL-ESIT-INF-DSI-2425/prct05-objects-classes-interfaces-AmartinLin/actions/workflows/coveralls.yml/badge.svg)](https://github.com/ULL-ESIT-INF-DSI-2425/prct05-objects-classes-interfaces-AmartinLin/actions/workflows/coveralls.yml)
