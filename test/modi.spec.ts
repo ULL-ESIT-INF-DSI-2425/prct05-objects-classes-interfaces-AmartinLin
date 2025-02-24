@@ -86,4 +86,8 @@ describe("Clase Asignatura", () => {
         expect(asignatura.buscaProfe("nombre", "Alberto")).toStrictEqual(profesorAlberto)
         expect(asignatura.buscaProfe("correo", "alberto@ull.docente.es")).toStrictEqual(profesorAlberto)
     })
+    test("busqueda de alumnado", () => {
+        expect(asignatura.buscaAlumno("nombre", "Juan")).toStrictEqual(estudiante1)
+        expect(asignatura.buscaAlumno("correo", "alberto@ull.es")).toStrictEqual(estudiante1)
+    })
 })

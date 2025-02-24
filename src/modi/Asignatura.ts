@@ -54,4 +54,24 @@ export class Asignatura {
         }
         return retorno;
     }
+
+    /**
+     * Nos permite buscar a un alumno mediante correo o nombre
+     * @param opcion - opcion de correo o nombre
+     * @param identificador - nombre o correo en sí
+     * @returns Estudiante | undefined
+     */
+    buscaAlumno(opcion: string, identificador: string): Estudiante | undefined {
+        let retorno: Estudiante | undefined;
+        if (opcion === "correo") {
+            retorno = this._alumnado.find((alumno) => {
+                return alumno.correo === identificador;
+            })
+        } else {
+            retorno = this._alumnado.find((alumno) => {
+                return alumno.nombre === identificador;
+            })
+        }
+        return retorno;
+    }
 }
