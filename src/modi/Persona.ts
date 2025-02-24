@@ -1,4 +1,4 @@
-export class Persona {
+export abstract class Persona {
   constructor(
     private _nombre: string,
     private _apellido: string,
@@ -45,4 +45,6 @@ export class Persona {
   set cOjos(elemento: string) {
     this._cOjos = elemento;
   }
+
+  abstract showinfo(): string;
 }
