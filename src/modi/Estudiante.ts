@@ -24,10 +24,15 @@ export class Estudiante extends Persona {
   set correo(elemento: string) {
     this._correo = elemento;
   }
+  
   set asignaturas_matriculado(elemento: number) {
     this._asignaturas_matriculado = elemento;
   }
 
+  /**
+   * Nos muestra toda la informacion acerca de un estudiante en forma de un string
+   * @returns - string
+   */
   showinfo(): string {
     return `${this.apellido}, ${this.nombre} {id: ${this.id}, nacimiento: ${this.nacimiento}, color de pelo: ${this.cPelo}, color de ojos: ${this.cOjos}, correo: ${this._correo}, asignaturas matriculado: ${this._asignaturas_matriculado}`;
   }

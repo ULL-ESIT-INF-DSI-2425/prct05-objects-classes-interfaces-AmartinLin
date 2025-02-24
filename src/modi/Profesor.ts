@@ -35,6 +35,10 @@ export class Profesor extends Persona {
     this._numero_asignaturas_impartidas = elemento;
   }
 
+  /**
+   * Nos muestra toda la información acerca del profesor en forma de string
+   * @returns - String
+   */
   showinfo(): string {
     return `${this.apellido}, ${this.nombre} {id: ${this.id}, nacimiento: ${this.nacimiento}, color de pelo: ${this.cPelo}, color de ojos: ${this.cOjos}, correo institucional: ${this._correo_institucional}, horario: de ${this._horario[0]} a ${this._horario[1]}, numero de asignaturas impartidas: ${this._numero_asignaturas_impartidas}`;
   }

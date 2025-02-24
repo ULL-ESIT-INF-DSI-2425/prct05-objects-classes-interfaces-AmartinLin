@@ -46,5 +46,8 @@ export abstract class Persona {
     this._cOjos = elemento;
   }
 
+  /**
+   * Nos muestra la informacion de la persona en forma de string
+   */
   abstract showinfo(): string;
 }

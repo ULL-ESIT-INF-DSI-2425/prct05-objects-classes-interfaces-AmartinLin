@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 //import { Persona } from "../src/modi/Persona"
 import { Estudiante } from "../src/modi/Estudiante";
 import { Profesor } from "../src/modi/Profesor";
+import { Asignatura } from "../src/modi/Asignatura";
 
 describe("Clase Estudiante", () => {
   const estudiante = new Estudiante("Alberto", "Castellón", "22-3-1999", 123456789, "Castaño", "Negros", "alberto@ull.es", 8);
@@ -69,4 +70,20 @@ describe("Clase Profesor", () => {
         const profesorAlberto = new Profesor("Alberto", "Castellón", "22-3-1999", 123456789, "Castaño", "Negros", "alberto@ull.docente.es", ["13:40", "17:00"], 4);
         expect(profesorAlberto.showinfo()).toBe("Castellón, Alberto {id: 123456789, nacimiento: 22-3-1999, color de pelo: Castaño, color de ojos: Negros, correo institucional: alberto@ull.docente.es, horario: de 13:40 a 17:00, numero de asignaturas impartidas: 4")
     });
+})
+
+describe("Clase Asignatura", () => {
+    const profesorAlberto = new Profesor("Alberto", "Castellón", "22-3-1999", 123456789, "Castaño", "Negros", "alberto@ull.docente.es", ["13:40", "17:00"], 4);
+    const estudiante1 = new Estudiante("Juan", "Marlon", "22-3-1999", 123456789, "Castaño", "Negros", "alberto@ull.es", 8);
+    const asignatura = new Asignatura(324, "Matemáticas", "Ing. Industrial", [profesorAlberto], [estudiante1] ,{"Juan Marlon": 9});
+    test("informacion del profesor que la imparte", () => {
+        expect(asignatura.showProfesorado()).toStrictEqual(["Castellón, Alberto {id: 123456789, nacimiento: 22-3-1999, color de pelo: Castaño, color de ojos: Negros, correo institucional: alberto@ull.docente.es, horario: de 13:40 a 17:00, numero de asignaturas impartidas: 4"])
+    }) 
+    test("informacion del alumnado", () => {
+        expect(asignatura.showAlumnado()).toStrictEqual(["Marlon, Juan {id: 123456789, nacimiento: 22-3-1999, color de pelo: Castaño, color de ojos: Negros, correo: alberto@ull.es, asignaturas matriculado: 8"])
+    })
+    test("busqueda de profesorado", () => {
+        expect(asignatura.buscaProfe("nombre", "Alberto")).toStrictEqual(profesorAlberto)
+        expect(asignatura.buscaProfe("correo", "alberto@ull.docente.es")).toStrictEqual(profesorAlberto)
+    })
 })
