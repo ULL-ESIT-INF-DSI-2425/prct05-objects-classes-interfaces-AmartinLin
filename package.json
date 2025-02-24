@@ -8,6 +8,7 @@
     "doc": "typedoc",
     "test": "vitest run",
     "onetest": "vitest run test/meanAndConcatenate",
+    "testmodi": "vitest run test/modi",
     "coverage": "vitest run --coverage"
   },
   "repository": {
